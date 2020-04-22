@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
@@ -13,7 +14,12 @@ public class FridayUtils {
      */
     public static LocalDate findPreviousFriday13th(LocalDate aDate) {
         // TODO
-        return null;
+       if (aDate.getDayOfWeek().getValue() == 5 && aDate.getDayOfMonth() == 13){
+           return aDate;
+       }else {
+          LocalDate minusDay = aDate.minusDays(1);
+          return findPreviousFriday13th(minusDay);
+       }
     }
 
     /**
@@ -25,7 +31,21 @@ public class FridayUtils {
      */
     public static int howManyFriday13ths(int year) {
         // TODO
-        return 0;
+        int counter = 0;
+        LocalDate localDate = LocalDate.of(year,12,31);
+        while (true){
+            if (localDate.getDayOfWeek() == DayOfWeek.FRIDAY && localDate.getDayOfMonth() == 13){
+            counter += 1;
+        }
+        else{
+            if (localDate.getYear() != year){
+                break;
+            }
+            }
+        localDate = localDate.minusDays(1);
+        }
+
+        return counter;
     }
 
 }
