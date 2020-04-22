@@ -1,5 +1,6 @@
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public class FridayUtils {
 
@@ -12,8 +13,22 @@ public class FridayUtils {
      * @return
      */
     public static LocalDate findPreviousFriday13th(LocalDate aDate) {
-        // TODO
-        return null;
+        LocalDate tempDate = aDate;
+        for (int i = aDate.getDayOfMonth(); i > 0; i--){
+             if (tempDate.getDayOfMonth() == 13) {
+                 if (tempDate.getDayOfWeek() == DayOfWeek.FRIDAY) {
+                     System.out.println("The most recent Friday the 13th was: " + aDate);
+                     return aDate;
+                 }
+             }
+             else{
+                 tempDate.minusDays(1);
+             }
+        }
+        int len = aDate.minusMonths(1).lengthOfMonth();
+        int day = aDate.getDayOfMonth();
+        int diff = len - day;
+        return findPreviousFriday13th(aDate.minusMonths(1).plusDays(diff));
     }
 
     /**
