@@ -13,7 +13,11 @@ public class FridayUtils {
      */
     public static LocalDate findPreviousFriday13th(LocalDate aDate) {
         // TODO
-        return null;
+        LocalDate currentDate = aDate;
+        while (currentDate.getDayOfWeek() != DayOfWeek.FRIDAY || currentDate.getDayOfMonth() != 13){
+            currentDate = currentDate.minusDays(1);
+        }
+        return currentDate;
     }
 
     /**
@@ -25,7 +29,19 @@ public class FridayUtils {
      */
     public static int howManyFriday13ths(int year) {
         // TODO
-        return 0;
+        int frequency=0;
+        LocalDate currentDate = LocalDate.of(year, 12, 31); //Last day of the year
+        while ( true ){
+            if (currentDate.getYear() != year){
+                break;
+            }else {
+                if (currentDate.getDayOfWeek() == DayOfWeek.FRIDAY && currentDate.getDayOfMonth() == 13){
+                    frequency +=1;
+                }
+                currentDate = currentDate.minusDays(1);
+            }
+        }
+        return frequency;
     }
 
 }
