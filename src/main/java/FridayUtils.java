@@ -12,9 +12,17 @@ public class FridayUtils {
      * @return
      */
     public static LocalDate findPreviousFriday13th(LocalDate aDate) {
-        // TODO
-        return null;
-    }
+        LocalDate theDate = aDate;
+            if (theDate.getDayOfMonth() == 13 || theDate.getDayOfWeek() == DayOfWeek.FRIDAY) {
+                    return theDate;
+                } else{
+                while (theDate.getDayOfMonth() != 13 || theDate.getDayOfWeek() != DayOfWeek.FRIDAY) {
+                    theDate.minusDays(1);
+                }
+            }
+            return theDate;
+        }
+
 
     /**
      * Return the number of friday 13ths in a given year.
@@ -24,8 +32,14 @@ public class FridayUtils {
      * @return
      */
     public static int howManyFriday13ths(int year) {
-        // TODO
-        return 0;
+        int numOfFriday13ths= 0;
+        LocalDate theDate = LocalDate.of(year,1,13);
+        for (int i=0; i < 12; i++) {
+            if (theDate.getDayOfWeek().equals(DayOfWeek.FRIDAY)) {
+                numOfFriday13ths++;
+            }
+            theDate = theDate.plusMonths(1);
+        }
+        return numOfFriday13ths;
     }
-
 }
