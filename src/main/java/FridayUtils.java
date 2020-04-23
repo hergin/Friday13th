@@ -11,9 +11,20 @@ public class FridayUtils {
      * @param aDate
      * @return
      */
-    public static LocalDate findPreviousFriday13th(LocalDate aDate) {
-        // TODO
-        return null;
+    public static LocalDate findPreviousFriday13th(LocalDate aDate)
+    {
+        LocalDate returnDate;
+
+        if (aDate.getDayOfWeek().getValue() == 5 && aDate.getDayOfMonth() == 13)
+        {
+            returnDate = aDate;
+        }
+        else
+        {
+            returnDate = findPreviousFriday13th(aDate.minusDays(1));
+        }
+
+        return(returnDate);
     }
 
     /**
@@ -25,7 +36,24 @@ public class FridayUtils {
      */
     public static int howManyFriday13ths(int year) {
         // TODO
-        return 0;
+        int Friday13ths = 0;
+
+        LocalDate aDate = LocalDate.of(year,1,13);
+        String dayOfTheWeek = aDate.getDayOfWeek().name();
+        for(int i=0; i < 12; i++)
+        {
+            if(dayOfTheWeek.contentEquals("FRIDAY"))
+            {
+                Friday13ths++;
+            }
+
+            aDate = aDate.plusMonths(1);
+
+            dayOfTheWeek = aDate.getDayOfWeek().name();
+
+        }
+
+        return Friday13ths;
     }
 
 }
